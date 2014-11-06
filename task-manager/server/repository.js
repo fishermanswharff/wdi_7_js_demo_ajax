@@ -1,67 +1,67 @@
 'use strict';
 
 var _ = require('lodash'),
-    Category = require('./domain/Category.js'),
-    Task = require('./domain/Task.js');
+Category = require('./domain/Category.js'),
+Task = require('./domain/Task.js');
 
 var repository = (function() {
-    var repo = {
-        categories: [],
+  var repo = {
+    categories: [],
 
-        createCategory: function(params) {
-            var category = new Category(params);
+    createCategory: function(params) {
+      var category = new Category(params);
 
-            repo.categories.push(category);
+      repo.categories.push(category);
 
-            return category;
-        },
+      return category;
+    },
 
-        updateCategory: function(id, params) {
-            var category = _.find(repo.categories, { 'id': parseInt(id) });
+    updateCategory: function(id, params) {
+      var category = _.find(repo.categories, { 'id': parseInt(id) });
 
-            // don't update primary key
-            delete params.id;
+        // don't update primary key
+        delete params.id;
 
-            _.forIn(params, function(value, key) {
-                category[key] = value;
-            });
+        _.forIn(params, function(value, key) {
+          category[key] = value;
+        });
 
-            return category;
-        },
+        return category;
+      },
 
-        deleteCategory: function(id) {
-            return _.remove(repo.categories, { 'id': parseInt(id) });
-        },
+      deleteCategory: function(id) {
+        return _.remove(repo.categories, { 'id': parseInt(id) });
+      },
 
-        tasks: [],
+      tasks: [],
 
-        createTask: function(params) {
-            var task = new Task(params);
+      createTask: function(params) {
+        var task = new Task(params);
 
-            repo.tasks.push(task);
+        repo.tasks.push(task);
 
-            return task;
-        },
+        return task;
+      },
 
-        updateTask: function(id, params) {
-            var task = _.find(repo.tasks, { 'id': parseInt(id) });
+      updateTask: function(id, params) {
+        var task = _.find(repo.tasks, { 'id': parseInt(id) });
 
-            // don't update primary key
-            delete params.id;
+        // don't update primary key
+        delete params.id;
 
-            _.forIn(params, function(value, key) {
-                task[key] = value;
-            });
+        _.forIn(params, function(value, key) {
+          task[key] = value;
+        });
 
-            return task;
-        },
+        return task;
+      },
 
-        deleteTask: function(id) {
-            return _.remove(repo.tasks, { 'id': parseInt(id) });
-        }
+      deleteTask: function(id) {
+        return _.remove(repo.tasks, { 'id': parseInt(id) });
+      }
     };
 
     return repo;
-})();
+  })();
 
 module.exports = repository;

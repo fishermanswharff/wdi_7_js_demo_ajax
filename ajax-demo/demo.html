@@ -6,30 +6,101 @@
 </head>
 <body>
 
-<div id="container"></div>
+<div id="container">
+  <ul class="js-users"></ul>
+</div>
 
 <script src="lib/jquery-2.1.1.min.js"></script>
 <script type="text/javascript">
 
-$('#container').load('server/users.html');
+// $('#container').load('server/users.html');
+
+$("#container").on("click",".js-users a",function(e){
+  e.preventDefault();
+  alert($(this).text());
+});
 
 // function buildUserList(users) {
-//     var userList = $('<ul>');
-//
-//     $.each(users, function(index, item) {
-//         $('<li>').text(item.name).appendTo(userList);
-//     });
-//
-//     return userList;
+
+//   var userList = $('<ul class="js-users">');
+//   $.each(users, function(index,item){
+//     $("<li>").append("<a href='#'>"+item.name+"</a>").appendTo(userList);
+//   });
+//   return userList;
 // }
-//
-// $.get('http://localhost:4567/users')
-// .done(function(response) {
-//     $('#container').html(buildUserList(response));
-// })
-// .fail(function(jqXHR, textStatus, errorThrown) {
-//    $('#container').html(jqXHR.responseText);
-// });
+
+
+/*
+//GET all users
+$.get("http://localhost:4567/users")
+  .done(function(response){
+    $("#container").html(buildUserList(response));
+  })
+  .fail(function(jqXHR, textStatus, errorThrown){
+    $("#container").html(jqXHR.responseText);
+  });
+*/
+
+/*
+//for posting a new user
+var user = { 
+  id: 5, 
+  name: "Douchey McDoucherton"
+};
+*/
+
+/*
+// AJAX POST request
+$.ajax({
+    url: 'http://localhost:4567/users',
+    type: 'post',
+    dataType: 'json',
+    data: JSON.stringify(user),
+    success: function (data) {
+      data
+    }
+  }).done(function(response){
+    // console.log(response)
+    buildUserList(response);
+  });
+
+function buildUserList(users) {
+  var userList = $('.js-users');
+  $("<li>").append("<a href='#'>"+users.name+"</a>").appendTo(userList);
+  return userList;
+}
+*/
+
+/*
+//GET a specific user
+$.ajax({
+  url: 'http://localhost:4567/users/4',
+  type: 'GET'
+})
+.done(function(response){
+  $("#container").html(buildUserList(response));
+})
+.fail(function(jqXHR, textStatus, errorThrown){
+  $("#container").html(jqXHR.responseText);
+});
+
+*/
+
+
+/*
+//DELETE USER
+//———————————————————————————————
+$.ajax({
+    url: 'http://localhost:4567/users/1',
+    type: 'DELETE',
+    success: function (data) {
+      console.log(data)
+    }
+  }).done(function(response){
+    // console.log(response);
+  });
+*/
+
 
 // $.ajax({
 //     url: 'http://localhost:4567/users',

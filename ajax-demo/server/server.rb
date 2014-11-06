@@ -5,7 +5,8 @@ require 'json'
 users = [
   {:id => 1, :name => 'Dan'},
   {:id => 2, :name => 'Ella'},
-  {:id => 3, :name => 'Ava'}
+  {:id => 3, :name => 'Ava'},
+  {:id => 4, :name => 'Jason'}
 ]
 
 before do
@@ -30,6 +31,10 @@ end
 
 get '/users' do
   users.to_json
+end
+
+get '/users/:id' do 
+  users[params[:id].to_i - 1].to_json
 end
 
 post '/users' do
