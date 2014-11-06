@@ -1,0 +1,18 @@
+<h1>Users Page</h1>
+
+<ul>
+    {{#each users}}
+        <li>{{ username }} <a class="js-deleteUser" data-id="{{ id }}" href="#">delete</a></li>
+    {{/each}}
+</ul>
+
+<br />
+
+<form role="form" class="js-userForm" id="userForm">
+    <div class="form-group">
+        <label>Username</label>
+        <input type="text" class="form-control" name="username">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add User</button>
+</form>

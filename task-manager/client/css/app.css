@@ -8,6 +8,6 @@ body {
     margin: 20px 0 0;
 }
 
-.completed {
+#taskList li[data-status="2"] {
     text-decoration: line-through !important; /* lazy way to override hover styles so strike shows right way */
 }

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+<body>
+    
+<p><a class="js-PlayGame" href="#">Play Game</a></p>
+<p><a href="SpecRunnerGame.html">Run Game Tests</a></p>
+<p><a href="SpecRunnerMathHelper.html">Run Math Helper Tests</a></p>
+<p><a href="SpecRunnerCar.html">Run Car Tests</a></p>
+
+<script src="lib/jquery-2.1.1.min.js"></script>
+<script src="src/Game.js"></script>
+<script type="text/javascript">
+
+$('.js-PlayGame').on('click', function(e) {
+    e.preventDefault();
+    
+    var game = new Game();
+
+    for (var i = 0; i < 3; i++) {
+        var turn = game.takeTurn();
+
+        console.log(turn);
+
+        var winner = game.compare(turn);
+        
+        console.log(winner);
+
+        if (winner === 'you') {
+            game.your_score++;
+        } else if (winner === 'computer') {
+            game.computer_score++;
+        }
+
+        if (game.your_score > 1) {
+            alert('You are the winner!');
+            break;
+        }
+
+        if (game.computer_score > 1) {
+            alert('The computer is the winner!');
+            break;
+        }
+    }
+});
+
+</script>
+
+</body>
+</html>

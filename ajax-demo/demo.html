@@ -20,6 +20,13 @@ $("#container").on("click",".js-users a",function(e){
   alert($(this).text());
 });
 
+// add an event to alert each name in the list
+$('#container').on('click', '.js-users a', function(e) {
+    e.preventDefault();
+
+    alert($(this).text());
+});
+
 // function buildUserList(users) {
 
 //   var userList = $('<ul class="js-users">');
@@ -116,7 +123,7 @@ $.ajax({
 //     id: 4,
 //     name: 'Jorden'
 // };
-//
+
 // $.ajax({
 //     url: 'http://localhost:4567/users',
 //     type: 'POST',
@@ -126,7 +133,14 @@ $.ajax({
 //     console.log(response);
 // });
 
-// $.post('http://localhost:4567/users', JSON.stringify(user)).success(function(response) {
+// $.ajax({
+//     url: 'http://localhost:4567/users/4',
+//     type: 'DELETE'
+// }).done(function(response) {
+//     console.log(response);
+// });
+
+// $.post('http://localhost:4567/users', JSON.stringify(user)).done(function(response) {
 //     console.log(response);
 // });
 

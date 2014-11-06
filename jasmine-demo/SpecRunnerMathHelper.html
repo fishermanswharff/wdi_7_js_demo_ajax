@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Jasmine Spec Runner 2.0.0</title>
+<!-- jasmine css -->
+<link rel="stylesheet" type="text/css" href="lib/jasmine-2.0.0/jasmine.css">
+
+<style type="text/css" media="screen">
+/* fis jasmine styles */
+.html-reporter .symbol-summary {
+    overflow: visible;
+}
+
+/* add some style for blanket report */
+#blanket-main {
+    margin: 50px 0 0 !important;
+}
+</style>
+
+<!-- jasmine js -->
+<script type="text/javascript" src="lib/jasmine-2.0.0/jasmine.js"></script>
+<script type="text/javascript" src="lib/jasmine-2.0.0/jasmine-html.js"></script>
+<script type="text/javascript" src="lib/jasmine-2.0.0/boot.js"></script>
+
+<!-- blanket.js -->
+<script src="lib/blanket.js"></script>
+<script type="text/javascript" src="lib/jasmine-blanket.js"></script>
+
+<!-- include source files here... -->
+<script type="text/javascript" src="src/MathHelper.js" data-cover></script>
+
+<!-- include spec files here... -->
+<script type="text/javascript" src="spec/MathHelperSpec.js"></script>
+
+</head>
+<body>
+</body>
+</html>

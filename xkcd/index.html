@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>XKCD</title>
+</head>
+<body>
+
+<div id="container"></div>
+
+<script src="lib/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+
+$.get('http://xkcd-unofficial-api.herokuapp.com/xkcd')
+.done(function(response) {
+    $.each(response, function(index, item) {
+        var el = $('<div>').addClass('comic');
+        
+        $('<p>').text(item.title).appendTo(el);
+        
+        $('<img>').attr('src', item.img).appendTo(el);
+        
+        $('#container').append(el);
+    });
+});
+
+</script>
+
+</body>
+</html>

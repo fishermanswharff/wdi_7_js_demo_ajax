@@ -3,6 +3,41 @@
 var taskManager = {};
 
 // helpers
+taskManager.fetchCategories = function() {
+    $.ajax({
+        url: 'http://localhost:3000/categories',
+        type: 'GET'
+    }).done(function(response) {
+        taskManager.buildCategorySelect(response);
+    });
+};
+
+taskManager.fetchTasks = function() {
+    $.ajax({
+        url: 'http://localhost:3000/tasks',
+        type: 'GET'
+    }).done(function(response) {
+        taskManager.buildTaskList(response);
+    });
+};
+
+taskManager.buildCategorySelect = function(categories) {
+    $.each(categories, function(index, item) {
+        var option = $('<option>').val(item.id).text(item.name);
+        
+        $('select[name="category"]').append(option);
+    });
+};
+
+taskManager.buildTaskList = function(tasks) {
+    $.each(tasks, function(index, item) {
+        var li = $('<li>').attr('data-id', item.id).attr('data-status', item.status);
+        $('<a>').attr('href', '#').text(item.name).appendTo(li);
+        
+        $('.js-taskList').append(li);
+    });
+};
+
 taskManager.createCategory = function(category) {
   if (category === '') {
     return;
@@ -78,25 +113,23 @@ taskManager.clickTaskItem = function(e) {
   });
 
   // $(e.target).toggleClass('completed');
-
 };
 
 taskManager.clickRemoveCompleted = function(e) {
   e.preventDefault();
-    
   $('.js-taskList li[data-status="2"]').each(function() {
-      var iteratorContext = this;
-      
-      var id = $(iteratorContext).attr('data-id');
-      
-      $.ajax({
-        url: 'http://localhost:3000/tasks/' + id,
-        type: 'DELETE'
-      }).done(function(response) {
-        $(iteratorContext).fadeOut(function() {
-            $(this).remove();
-        });
-      });
+    var iteratorContext = this;
+    
+    var id = $(iteratorContext).attr('data-id');
+    
+    $.ajax({
+      url: 'http://localhost:3000/tasks/' + id,
+      type: 'DELETE'
+    }).done(function(response) {
+      $(iteratorContext).fadeOut(function() {
+          $(this).remove();
+      });
+    });
   });
   
 };
@@ -110,9 +143,19 @@ taskManager.printCategories = function(e){
 };
 
 taskManager.printTasks = function(e){
-  $(e).each(function(index, task){
-    var item = $("<li data-id='" + task.id + "'><a href='#'>" + task.name + "</a></li>")
-    item.appendTo('.js-taskList ul').hide().fadeIn();
+  $('.js-taskList li[data-status="2"]').each(function() {
+      var iteratorContext = this;
+      
+      var id = $(iteratorContext).attr('data-id');
+      
+      $.ajax({
+          url: 'http://localhost:3000/tasks/' + id,
+          type: 'DELETE'
+      }).done(function(response) {
+          $(iteratorContext).fadeOut(function() {
+              $(this).remove();
+          });
+      });
   });
 };
 
@@ -145,4 +188,9 @@ taskManager.addEvents = function() {
 // DOM ready
 $(function() {
   taskManager.addEvents();
+    $.ajaxSetup({
+        contentType: 'application/json'
+    });
+    
+    taskManager.addEvents();
 });
